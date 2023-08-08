@@ -26,3 +26,9 @@
 .dropdown-menu .dropdown-item:hover {
   color: black !important; 
 }
+.upload-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}

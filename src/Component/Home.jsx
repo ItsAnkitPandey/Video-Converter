@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import UploadVideo from './UploadVideo';
 
 const Home = () => {
     const [selectedItem, setSelectedItem] = useState('MP4');
@@ -15,6 +16,18 @@ const Home = () => {
             setConvertedItem(item)
         }
     });
+
+    const handleConvert = async () => {
+        // Simulate conversion process by waiting for a few seconds
+        await new Promise(resolve => setTimeout(resolve, 3000));
+
+        // Replace this with actual logic to fetch converted video from backend
+        const convertedFile = {
+            url: 'path_to_converted_video',
+            fileName: `converted_video.${convertedItem}`
+        };
+        return convertedFile;
+    };
     return (
         <div>
             <div className="home-container " >
@@ -54,6 +67,7 @@ const Home = () => {
 
                 </div>
             </div>
+            <UploadVideo selectedItem={selectedItem} convertedItem={convertedItem} onConvert={handleConvert}/>
         </div>
     )
 }
