@@ -1,38 +1,28 @@
-.App {
-  text-align: center;
+.home-container{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: black;
+  color: white;
+  padding: 20px;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.home-details{
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
 
-.App-link {
-  color: #61dafb;
-}
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+}
+.home-details>p{
+  text-align: center;
+}
+.home-funtions{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* Apply white text color on hover for dropdown items */
+.dropdown-menu .dropdown-item:hover {
+  color: black !important; 
 }
