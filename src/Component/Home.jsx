@@ -47,7 +47,7 @@ const Home = () => {
                             <li><p className="dropdown-item text-white" onClick={() => handleItemClick("MKV")}>MKV</p></li>
                             <li><p className="dropdown-item text-white" onClick={() => handleItemClick("3GP")}>3GP</p></li>
                             <li><p className="dropdown-item text-white" onClick={() => handleItemClick("WEBM")}>WEBM</p></li>
-                            <li><p className="dropdown-item text-white" onClick={() => handleItemClick("GIF")}>GIF</p></li>
+                            <li><p className="dropdown-item text-white" onClick={() => handleItemClick("MOV")}>MOV</p></li>
                         </ul>
                     </div>
                     <h5>to</h5>
@@ -61,13 +61,14 @@ const Home = () => {
                             <li><p className="dropdown-item text-white" onClick={() => handleConvertedClick("MKV")}>MKV</p></li>
                             <li><p className="dropdown-item text-white" onClick={() => handleConvertedClick("3GP")}>3GP</p></li>
                             <li><p className="dropdown-item text-white" onClick={() => handleConvertedClick("WEBM")}>WEBM</p></li>
-                            <li><p className="dropdown-item text-white" onClick={() => handleConvertedClick("GIF")}>GIF</p></li>
+                            <li><p className="dropdown-item text-white" onClick={() => handleConvertedClick("MOV")}>MOV</p></li>
                         </ul>
                     </div>
 
                 </div>
             </div>
             <UploadVideo selectedItem={selectedItem} convertedItem={convertedItem} onConvert={handleConvert}/>
+           
         </div>
     )
 }
