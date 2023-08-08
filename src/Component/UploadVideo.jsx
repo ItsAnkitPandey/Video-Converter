@@ -15,7 +15,7 @@ const UploadVideo = ({selectedItem, convertedItem, onConvert}) => {
     return (
         <div className='upload-container'>
             <div className='upload-container mt-5'>
-                <label for="formFileLg" class="form-label">Upload Video</label>
+                <label for="formFileLg" class="form-label"><h4>Upload Video</h4></label>
                 <input style={{ width: '400px' }}  class="form-control form-control-lg" id="formFileLg" type="file" accept={`video/${selectedItem}`}/>
                 <button type="button" class="btn btn-success my-3" onClick={handleConvert}>Convert to {convertedItem} </button>
                 {convertedVideo && (
