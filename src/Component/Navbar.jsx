@@ -5,7 +5,7 @@ const Navbar = () => {
         <div  >
             <nav className="navbar navbar-expand-lg bg-body-tertiary  bg-dark " data-bs-theme="dark">
                 <div className="container-fluid mx-5">
-                    <a className="navbar-brand" href=" "><i className="fa-solid fa-file-video mx-2"></i>VidConvert</a>
+                    <a className="navbar-brand" href=" "><i class="fa-solid fa-video fa-fade mx-3" style={{color: '#ec7f18'}}></i>VidConvert</a>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
