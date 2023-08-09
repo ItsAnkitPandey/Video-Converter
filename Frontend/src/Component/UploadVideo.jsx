@@ -49,7 +49,7 @@ const UploadVideo = ({ selectedItem, convertedItem }) => {
                 const url = URL.createObjectURL(blob);
                 const a = document.createElement('a');
                 a.href = url;
-                a.download = `${convertedVideo.fileName}.${convertedItem}`;
+                a.download = `vidConvertedFile.${convertedItem}`;
                 document.body.appendChild(a);
                 a.click();
                 document.body.removeChild(a);
