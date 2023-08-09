@@ -9,40 +9,37 @@ const UploadVideo = ({ selectedItem, convertedItem }) => {
 
     const handleConvert = async () => {
         setIsLoading(true);
-
+      
         const formData = new FormData();
         formData.append('video', selectedFile);
-        formData.append('extension', convertedItem); // Send the chosen extension
-
+        formData.append('extension', convertedItem);
+      
         try {
-            const response = await fetch(`${host}/api/upload`, {
-                method: 'POST',
-                body: formData,
+          const response = await fetch(`${host}/api/upload`, {
+            method: 'POST',
+            body: formData,
+          });
+      
+          if (response.ok) {
+            const responseData = await response.json();
+      
+            // Directly call handleDownloadClick with the required information
+            handleDownloadClick({
+              videoId: responseData.videoId,
+              fileName: responseData.convertedFileName,
             });
-
-            if (response.ok) {
-                const responseData = await response.json();
-
-                // Set the videoId and convertedFileName in the state
-                const newConvertedVideo = {
-                    videoId: responseData.videoId,
-                    fileName: responseData.convertedFileName,
-                };
-                setConvertedVideo(newConvertedVideo);
-
-                // Trigger the download after successful conversion
-                handleDownloadClick(newConvertedVideo);
-                console.log(`convertedVideo is used for download: ${convertedVideo}`);
-
-            } else {
-                console.error('Video upload failed');
-            }
+      
+            console.log('Video uploaded and renamed successfully');
+          } else {
+            console.error('Video upload failed');
+          }
         } catch (error) {
-            console.error('An error occurred', error);
+          console.error('An error occurred', error);
         }
-
+      
         setIsLoading(false);
-    };
+      };
+      
 
 
     const handleDownloadClick = async () => {
