@@ -92,7 +92,7 @@ const UploadVideo = ({ selectedItem, convertedItem }) => {
                     Convert and Download
                 </button>
                 {isLoading ? (
-                    <Progress /> // Display loading indicator while uploading
+                   <h4> Converting......<Progress /></h4> // Display loading indicator while uploading
                 ) : null}
             </div>
         </div>
