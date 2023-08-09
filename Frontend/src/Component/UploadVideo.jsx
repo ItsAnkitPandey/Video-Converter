@@ -6,7 +6,6 @@ const UploadVideo = ({ selectedItem, convertedItem }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [selectedFile, setSelectedFile] = useState(null);
     const [convertedVideo, setConvertedVideo] = useState(null); // Define convertedVideo state
-
     const handleConvert = async () => {
         setIsLoading(true);
 
@@ -18,6 +17,8 @@ const UploadVideo = ({ selectedItem, convertedItem }) => {
             const response = await fetch(`${host}/api/upload`, {
                 method: 'POST',
                 body: formData,
+           
+                
             });
 
             if (response.ok) {
@@ -28,8 +29,6 @@ const UploadVideo = ({ selectedItem, convertedItem }) => {
                 };
                 setConvertedVideo(newConvertedVideo);
 
-                // Trigger the download after successful conversion
-                handleDownloadClick(newConvertedVideo);
             } else {
                 console.error('Video upload failed');
             }
@@ -59,6 +58,7 @@ const UploadVideo = ({ selectedItem, convertedItem }) => {
                 await fetch(`${host}/api/delete/${convertedVideo.videoId}`, {
                     method: 'DELETE',
                 });
+                window.location.reload();
             } catch (error) {
                 console.error('An error occurred during download', error);
             }
@@ -89,11 +89,25 @@ const UploadVideo = ({ selectedItem, convertedItem }) => {
                     onClick={handleConvert}
                     disabled={!selectedFile}
                 >
-                    Convert and Download
+                    Convert
                 </button>
                 {isLoading ? (
-                   <h4> Converting......<Progress /></h4> // Display loading indicator while uploading
-                ) : null}
+                    <div>
+                        <h4>Converting...</h4>
+                        <Progress  />
+                    </div>
+                ) : (
+                    convertedVideo && (
+                        <button
+                            type="button"
+                            className="btn btn-dark my-3"
+                            onClick={handleDownloadClick} // Remove the parentheses here
+                        >
+                            Download
+                        </button>
+                    )
+                )}
+
             </div>
         </div>
     );
