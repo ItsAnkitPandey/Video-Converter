@@ -56,7 +56,7 @@ const UploadVideo = ({ selectedItem, convertedItem }) => {
           document.body.appendChild(a); // Append the link to the DOM
           a.click();
           document.body.removeChild(a); // Remove the link from the DOM
-      
+          window.location.reload();
           // Delete the video from the database after successful download
           await fetch(`${host}/api/delete/${convertedVideo.videoId}`, {
             method: 'DELETE',
