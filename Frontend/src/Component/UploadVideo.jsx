@@ -9,60 +9,62 @@ const UploadVideo = ({ selectedItem, convertedItem }) => {
 
     const handleConvert = async () => {
         setIsLoading(true);
-      
+
         const formData = new FormData();
         formData.append('video', selectedFile);
         formData.append('extension', convertedItem);
-      
+
         try {
-          const response = await fetch(`${host}/api/upload`, {
-            method: 'POST',
-            body: formData,
-          });
-      
-          if (response.ok) {
-            const responseData = await response.json();
-      
-            // Directly call handleDownloadClick with the required information
-            handleDownloadClick({
-              videoId: responseData.videoId,
-              fileName: responseData.convertedFileName,
+            const response = await fetch(`${host}/api/upload`, {
+                method: 'POST',
+                body: formData,
             });
-      
-            console.log('Video uploaded and renamed successfully');
-          } else {
-            console.error('Video upload failed');
-          }
+
+            if (response.ok) {
+                const responseData = await response.json();
+                const newConvertedVideo = {
+                    videoId: responseData.videoId,
+                    fileName: responseData.convertedFileName,
+                };
+                setConvertedVideo(newConvertedVideo);
+
+                // Trigger the download after successful conversion
+                handleDownloadClick(newConvertedVideo);
+            } else {
+                console.error('Video upload failed');
+            }
         } catch (error) {
-          console.error('An error occurred', error);
+            console.error('An error occurred', error);
         }
-      
+
         setIsLoading(false);
-      };
-      
+    };
+
 
 
     const handleDownloadClick = async () => {
-        try {
-          const response = await fetch(`${host}/api/download/${convertedVideo.videoId}`);
-          const blob = await response.blob();
-          const url = URL.createObjectURL(blob);
-          const a = document.createElement('a');
-          a.href = url;
-          a.download = `${convertedVideo.fileName}.${convertedItem}`; // Use convertedItem for the extension
-          document.body.appendChild(a); // Append the link to the DOM
-          a.click();
-          document.body.removeChild(a); // Remove the link from the DOM
-          window.location.reload();
-          // Delete the video from the database after successful download
-          await fetch(`${host}/api/delete/${convertedVideo.videoId}`, {
-            method: 'DELETE',
-          });
-        } catch (error) {
-          console.error('An error occurred during download', error);
+        if (convertedVideo) { // Ensure convertedVideo is not null
+            try {
+                const response = await fetch(`${host}/api/download/${convertedVideo.videoId}`);
+                const blob = await response.blob();
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `${convertedVideo.fileName}.${convertedItem}`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+
+                // Delete the video from the database after successful download
+                await fetch(`${host}/api/delete/${convertedVideo.videoId}`, {
+                    method: 'DELETE',
+                });
+            } catch (error) {
+                console.error('An error occurred during download', error);
+            }
         }
-      };
-      
+    };
+
     const handleFileChange = (event) => {
         setSelectedFile(event.target.files[0]);
     };
